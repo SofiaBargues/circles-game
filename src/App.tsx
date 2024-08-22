@@ -7,12 +7,17 @@ import { useState } from "react";
 function App() {
   const [clickX, setClickX] = useState(0);
   const [clickY, setClickY] = useState(0);
+  const [listOfDots, setListOfDots] = useState([]);
 
   function handleClick(event) {
-    setClickX(event.clientX);
-    setClickY(event.clientY);
-  }
+    const x = event.clientX;
+    const y = event.clientY;
 
+    setClickX(x);
+    setClickY(y);
+    setListOfDots((prevDots) => [...prevDots, { x, y }]);
+  }
+  console.log(listOfDots);
   return (
     <div className="bg-red-500 flex justify-center h-screen relative">
       <div
@@ -28,12 +33,13 @@ function App() {
         <button className="bg-green-500 m-2  p-2 rounded-md text-white">
           Reset
         </button>
+
         <div
           style={{
             marginLeft: clickX,
             marginTop: clickY,
           }}
-          className="bg-red-900 rounded-full  ml-0 h-10 w-10 absolute "
+          className="bg-red-900 rounded-full  h-10 w-10 absolute "
         ></div>
       </div>
     </div>
