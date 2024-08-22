@@ -10,8 +10,8 @@ function App() {
   const [listOfDots, setListOfDots] = useState<{ x: number; y: number }[]>([]);
 
   function handleClick(event) {
-    const x = event.clientX;
-    const y = event.clientY;
+    const x = event.clientX - 20;
+    const y = event.clientY - 80;
 
     setClickX(x);
     setClickY(y);
