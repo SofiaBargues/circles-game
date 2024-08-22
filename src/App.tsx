@@ -7,7 +7,7 @@ import { useState } from "react";
 function App() {
   const [clickX, setClickX] = useState(0);
   const [clickY, setClickY] = useState(0);
-  const [listOfDots, setListOfDots] = useState([]);
+  const [listOfDots, setListOfDots] = useState<{ x: number; y: number }[]>([]);
 
   function handleClick(event) {
     const x = event.clientX;
@@ -33,14 +33,15 @@ function App() {
         <button className="bg-green-500 m-2  p-2 rounded-md text-white">
           Reset
         </button>
-
-        <div
-          style={{
-            marginLeft: clickX,
-            marginTop: clickY,
-          }}
-          className="bg-red-900 rounded-full  h-10 w-10 absolute "
-        ></div>
+        {listOfDots.map((dot) => (
+          <div
+            style={{
+              marginLeft: dot.x,
+              marginTop: dot.y,
+            }}
+            className="bg-red-900 rounded-full  h-10 w-10 absolute "
+          ></div>
+        ))}
       </div>
     </div>
   );
