@@ -5,10 +5,14 @@
 import { useState } from "react";
 
 function App() {
-  const [dots, setDots] = useState<{ x: number; y: number }[]>([]);
-  const [deletedDots, setDeletedDots] = useState<{ x: number; y: number }[]>(
-    []
-  );
+  type Dot = {
+    x: number;
+    y: number;
+    color: string;
+  };
+
+  const [dots, setDots] = useState<Dot[]>([]);
+  const [deletedDots, setDeletedDots] = useState<Dot[]>([]);
   function handleReset() {
     setDots([]);
     setDeletedDots([]);
@@ -46,9 +50,10 @@ function App() {
   function handleClick(event) {
     const x = event.clientX - 20;
     const y = event.clientY - 80;
-
+    //agregar color
     setDots((prevDots) => [...prevDots, { x, y }]);
   }
+
   return (
     <div className="bg-red-500 flex justify-center h-screen relative">
       <div className="bg-white w-[950px] h-[900px] m-auto ">
@@ -79,6 +84,7 @@ function App() {
               style={{
                 marginLeft: dot.x,
                 marginTop: dot.y,
+                // agreegar color
               }}
               className="bg-red-900 rounded-full  h-10 w-10 absolute "
             ></div>
