@@ -5,43 +5,49 @@
 import { useState } from "react";
 
 function App() {
-  const [listOfDots, setListOfDots] = useState<{ x: number; y: number }[]>([]);
+  const [dots, setDots] = useState<{ x: number; y: number }[]>([]);
   const [deletedDots, setDeletedDots] = useState<{ x: number; y: number }[]>(
     []
   );
   function handleReset() {
-    setListOfDots([]);
+    setDots([]);
     setDeletedDots([]);
   }
 
   function handleUndo() {
+    if (!dots.length) {
+      return;
+    }
     //borrar de listOfDots el ultimo elemento
-    let list = [...listOfDots];
-    let deleted = list.pop();
-    setListOfDots(list);
+    const newDots = [...dots];
+    const deletedDot = newDots.pop()!;
+    setDots(newDots);
 
     //agregar el elemento eliminado a deletedDots
-    let listDeleted = [...deletedDots];
-    listDeleted.push(deleted);
+    const listDeleted = [...deletedDots];
+    listDeleted.push(deletedDot);
     setDeletedDots(listDeleted);
   }
 
   function handleRedo() {
-    let listDeleted = [...deletedDots];
+    if (!deletedDots.length) {
+      return;
+    }
+    const listDeleted = [...deletedDots];
     //saco el ultimo elemento de deletedDots
-    let deleted = listDeleted.pop();
+    const deletedDot = listDeleted.pop();
     setDeletedDots(listDeleted);
     //sumo el ultimo elemento a listOfDots
-    let list = [...listOfDots];
-    list.push(deleted);
-    setListOfDots(list);
+    const newDots = [...dots];
+    newDots.push(deletedDot);
+    setDots(newDots);
   }
 
   function handleClick(event) {
     const x = event.clientX - 20;
     const y = event.clientY - 80;
 
-    setListOfDots((prevDots) => [...prevDots, { x, y }]);
+    setDots((prevDots) => [...prevDots, { x, y }]);
   }
   return (
     <div className="bg-red-500 flex justify-center h-screen relative">
@@ -68,7 +74,7 @@ function App() {
           </button>{" "}
         </div>
         <div onClick={handleClick} className=" h-[800px] ">
-          {listOfDots.map((dot) => (
+          {dots.map((dot) => (
             <div
               style={{
                 marginLeft: dot.x,
