@@ -9,6 +9,9 @@ function App() {
   const [clickY, setClickY] = useState(0);
   const [listOfDots, setListOfDots] = useState<{ x: number; y: number }[]>([]);
 
+  function handleReset() {
+    setListOfDots([]);
+  }
   function handleClick(event) {
     const x = event.clientX - 20;
     const y = event.clientY - 80;
@@ -20,28 +23,33 @@ function App() {
   console.log(listOfDots);
   return (
     <div className="bg-red-500 flex justify-center h-screen relative">
-      <div
-        onClick={handleClick}
-        className="bg-white w-[950px] h-[900px] m-auto "
-      >
-        <button className="bg-green-500 m-2 p-2 rounded-md text-white">
-          Undo
-        </button>
-        <button className="bg-green-500 m-2 p-2 rounded-md text-white">
-          Redo
-        </button>
-        <button className="bg-green-500 m-2  p-2 rounded-md text-white">
-          Reset
-        </button>
-        {listOfDots.map((dot) => (
-          <div
-            style={{
-              marginLeft: dot.x,
-              marginTop: dot.y,
-            }}
-            className="bg-red-900 rounded-full  h-10 w-10 absolute "
-          ></div>
-        ))}
+      <div className="bg-white w-[950px] h-[900px] m-auto ">
+        {" "}
+        <div>
+          <button className="bg-green-500 m-2 p-2 rounded-md text-white">
+            Undo
+          </button>
+          <button className="bg-green-500 m-2 p-2 rounded-md text-white">
+            Redo
+          </button>
+          <button
+            onClick={handleReset}
+            className="bg-green-500 m-2  p-2 rounded-md text-white"
+          >
+            Reset
+          </button>{" "}
+        </div>
+        <div onClick={handleClick} className=" h-[800px] ">
+          {listOfDots.map((dot) => (
+            <div
+              style={{
+                marginLeft: dot.x,
+                marginTop: dot.y,
+              }}
+              className="bg-red-900 rounded-full  h-10 w-10 absolute "
+            ></div>
+          ))}
+        </div>
       </div>
     </div>
   );
