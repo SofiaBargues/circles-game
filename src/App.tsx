@@ -73,6 +73,7 @@ function App() {
       <div className="bg-white w-full h-full m-auto ">
         <div className="space-x-5">
           <button
+            disabled={!canUndo}
             onClick={handleUndo}
             className={
               "m-2 p-2 rounded-md text-white" +
@@ -82,6 +83,7 @@ function App() {
             Undo
           </button>
           <button
+            disabled={!canDelete}
             onClick={handleRedo}
             className={
               "bg-green-500 m-2 p-2 rounded-md text-white" +
@@ -91,6 +93,7 @@ function App() {
             Redo
           </button>
           <button
+            disabled={!canDelete && !canUndo}
             onClick={handleReset}
             className={
               "m-2  p-2 rounded-md text-white" +
