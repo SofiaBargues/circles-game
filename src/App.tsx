@@ -69,9 +69,8 @@ function App() {
   }
 
   return (
-    <div className="bg-red-500 flex justify-center h-screen relative">
+    <div className="bg-red-500 flex justify-center p-2 h-screen relative">
       <div className="bg-white w-[950px] h-[900px] m-auto ">
-        {" "}
         <div>
           <button
             onClick={handleUndo}
