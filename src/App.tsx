@@ -17,8 +17,9 @@ function App() {
     setDeletedDots([]);
   }
 
+  const canUndo = dots.length;
   function handleUndo() {
-    if (!dots.length) {
+    if (!canUndo) {
       return;
     }
     //borrar de listOfDots el ultimo elemento
@@ -32,8 +33,9 @@ function App() {
     setDeletedDots(listDeleted);
   }
 
+  const canDelete = deletedDots.length;
   function handleRedo() {
-    if (!deletedDots.length) {
+    if (!canDelete) {
       return;
     }
     const listDeleted = [...deletedDots];
@@ -62,7 +64,7 @@ function App() {
     const x = event.clientX - 20;
     const y = event.clientY - 70;
     const color = colorAleatorio();
-
+    setDeletedDots([]);
     setDots((prevDots) => [...prevDots, { x, y, color }]);
   }
 
@@ -72,19 +74,28 @@ function App() {
         <div className="space-x-5">
           <button
             onClick={handleUndo}
-            className="bg-green-500 m-2 p-2 rounded-md text-white"
+            className={
+              "m-2 p-2 rounded-md text-white" +
+              (canUndo ? " bg-green-500" : " bg-slate-600")
+            }
           >
             Undo
           </button>
           <button
             onClick={handleRedo}
-            className="bg-green-500 m-2 p-2 rounded-md text-white"
+            className={
+              "bg-green-500 m-2 p-2 rounded-md text-white" +
+              (canDelete ? " bg-green-500" : " bg-slate-600")
+            }
           >
             Redo
           </button>
           <button
             onClick={handleReset}
-            className="bg-green-500 m-2  p-2 rounded-md text-white"
+            className={
+              "m-2  p-2 rounded-md text-white" +
+              (canDelete || canUndo ? " bg-green-500" : " bg-slate-600")
+            }
           >
             Reset
           </button>{" "}
