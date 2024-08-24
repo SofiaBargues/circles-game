@@ -40,7 +40,7 @@ function App() {
     }
     const listDeleted = [...deletedDots];
     //saco el ultimo elemento de deletedDots
-    const deletedDot = listDeleted.pop();
+    const deletedDot = listDeleted.pop()!;
     setDeletedDots(listDeleted);
     //sumo el ultimo elemento a listOfDots
     const newDots = [...dots];
@@ -60,7 +60,7 @@ function App() {
     const indiceAleatorio = Math.floor(Math.random() * coloresHex.length);
     return coloresHex[indiceAleatorio];
   }
-  function handleClick(event) {
+  function handleClick(event: { clientX: number; clientY: number }) {
     const x = event.clientX - 20;
     const y = event.clientY - 70;
     const color = colorAleatorio();
