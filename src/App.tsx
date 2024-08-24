@@ -3,7 +3,6 @@
 // import viteLogo from "/vite.svg";
 
 import { useState } from "react";
-
 function App() {
   type Dot = {
     x: number;
@@ -47,11 +46,26 @@ function App() {
     setDots(newDots);
   }
 
+  function colorAleatorio() {
+    const coloresHex = [
+      "#000000",
+      "#FFFFFF",
+      "#FF0000",
+      "#00FF00",
+      "#0000FF",
+      "#FFFF00",
+      "#FFA500",
+      "#800080",
+    ];
+    const indiceAleatorio = Math.floor(Math.random() * coloresHex.length);
+    return coloresHex[indiceAleatorio];
+  }
   function handleClick(event) {
     const x = event.clientX - 20;
     const y = event.clientY - 80;
-    //agregar color
-    setDots((prevDots) => [...prevDots, { x, y }]);
+    const color = colorAleatorio();
+
+    setDots((prevDots) => [...prevDots, { x, y, color }]);
   }
 
   return (
@@ -84,9 +98,9 @@ function App() {
               style={{
                 marginLeft: dot.x,
                 marginTop: dot.y,
-                // agreegar color
+                background: dot.color,
               }}
-              className="bg-red-900 rounded-full  h-10 w-10 absolute "
+              className="rounded-full  h-10 w-10 absolute "
             ></div>
           ))}
         </div>
