@@ -48,8 +48,6 @@ function App() {
 
   function colorAleatorio() {
     const coloresHex = [
-      "#000000",
-      "#FFFFFF",
       "#FF0000",
       "#00FF00",
       "#0000FF",
@@ -62,16 +60,16 @@ function App() {
   }
   function handleClick(event) {
     const x = event.clientX - 20;
-    const y = event.clientY - 80;
+    const y = event.clientY - 70;
     const color = colorAleatorio();
 
     setDots((prevDots) => [...prevDots, { x, y, color }]);
   }
 
   return (
-    <div className="bg-red-500 flex justify-center p-2 h-screen relative">
-      <div className="bg-white w-[950px] h-[900px] m-auto ">
-        <div>
+    <div className="bg-red-500 flex justify-center p-2 relative h-[100dvh] overflow-hidden">
+      <div className="bg-white w-full h-full m-auto ">
+        <div className="space-x-5">
           <button
             onClick={handleUndo}
             className="bg-green-500 m-2 p-2 rounded-md text-white"
